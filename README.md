@@ -28,6 +28,7 @@ Tested on 2026-11-15 on Linux x64 against the live grid.
 
 For Goose there is also a ready provider file, [`goose/aipg.json`](goose/aipg.json), that adds the grid as a
 named provider; see the Goose guide.
+For Hermes Agent there is a provider plugin, [hermes-aipg-provider](https://github.com/speteai/hermes-aipg-provider).
 
 ## Known limit: `gpt-oss-120b` and tool calls
 

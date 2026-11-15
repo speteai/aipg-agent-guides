@@ -91,6 +91,19 @@ opens the interactive session with the same settings.
 Hermes reported the cost of the run as unknown: it has no price list for a custom endpoint. The grid's
 prices are at `https://api.aipowergrid.io/v1/pricing`, and the account balance shows the real charge.
 
+### As a named provider
+
+There is also a small plugin that adds the grid as the provider `aipg`:
+[hermes-aipg-provider](https://github.com/speteai/hermes-aipg-provider).
+
+```bash
+hermes plugins install speteai/hermes-aipg-provider
+hermes plugins enable aipg-community
+```
+
+Then put `AIPG_API_KEY=...` into `~/.hermes/.env` and set `provider: "aipg"` in the `model` block (no
+`base_url` or `api_key` line needed). Tested with Hermes Agent v0.23.1 on Linux.
+
 ## Things to know
 
 - Prompts are processed in plain text on computers run by independent operators. Do not point an agent
