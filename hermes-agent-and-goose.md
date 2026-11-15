@@ -44,6 +44,28 @@ goose run --with-builtin developer -t "List the files here and say what each one
 `OPENAI_HOST` is the address without `/v1`; Goose adds the path itself. The same values can be entered
 with `goose configure` (provider "OpenAI", then the host).
 
+### As a named provider
+
+Instead of the `OPENAI_*` variables, Goose can list the grid as its own provider. Download
+[`goose/aipg.json`](goose/aipg.json) into Goose's `custom_providers` folder:
+
+- macOS/Linux: `~/.config/goose/custom_providers/`
+- Windows: `%APPDATA%\Block\goose\config\custom_providers\`
+
+```bash
+mkdir -p ~/.config/goose/custom_providers
+curl -fsSL https://raw.githubusercontent.com/speteai/aipg-agent-guides/main/goose/aipg.json \
+  -o ~/.config/goose/custom_providers/aipg.json
+
+export AIPG_API_KEY=grid_...              # your Grid API key
+export GOOSE_PROVIDER=aipg GOOSE_MODEL=qwen38-flash-next-nvfp4
+goose run --with-builtin developer -t "List the files here and say what each one is."
+```
+
+The file contains no key. It lists only `qwen38-flash-next-nvfp4`, with the grid's list price, because
+`gpt-oss-120b` does not work for tool use at the moment. Tested with Goose v1.59.1 on Linux: the test task
+above ran in 14 s through this provider. The Goose desktop app was not tested.
+
 ## Hermes Agent
 
 In `~/.hermes/config.yaml`:

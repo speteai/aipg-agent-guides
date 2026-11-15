@@ -1,0 +1,18 @@
+{
+  "name": "aipg",
+  "engine": "openai",
+  "display_name": "AI Power Grid",
+  "description": "Open models served by independent GPU operators through one OpenAI-compatible API, billed per token from a prepaid balance. Community-written config, not an official AIPG file.",
+  "api_key_env": "AIPG_API_KEY",
+  "base_url": "https://api.aipowergrid.io/v1/chat/completions",
+  "models": [
+    {
+      "name": "qwen38-flash-next-nvfp4",
+      "context_limit": 40000,
+      "input_token_cost": 0.000000075,
+      "output_token_cost": 0.0000003
+    }
+  ],
+  "supports_streaming": true,
+  "requires_auth": true
+}

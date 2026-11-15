@@ -26,6 +26,9 @@ Tested on 2026-11-15 on Linux x64 against the live grid.
 | Model for agents | `qwen38-flash-next-nvfp4` |
 | Prices | `https://api.aipowergrid.io/v1/pricing` |
 
+For Goose there is also a ready provider file, [`goose/aipg.json`](goose/aipg.json), that adds the grid as a
+named provider; see the Goose guide.
+
 ## Known limit: `gpt-oss-120b` and tool calls
 
 On multi-step tasks the grid currently returns this model's tool call inside the reasoning text instead of
