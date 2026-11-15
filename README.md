@@ -12,7 +12,7 @@ what was not tested.
 | Goose | v1.59.1 | works | fails | [hermes-agent-and-goose.md](hermes-agent-and-goose.md) |
 | Hermes Agent | v0.23.1 | works | fails | [hermes-agent-and-goose.md](hermes-agent-and-goose.md) |
 | Aider | 0.86.2 | works | works | [aider-and-continue.md](aider-and-continue.md) |
-| Continue CLI | 1.5.47 | works | fails | [aider-and-continue.md](aider-and-continue.md) |
+| Continue CLI (no longer maintained) | 1.5.47 | works | fails | [aider-and-continue.md](aider-and-continue.md) |
 | OpenClaw | 2026.11.3 | works | fails | [openclaw-aipg-provider](https://github.com/speteai/openclaw-aipg-provider) (plugin) |
 
 Tested on 2026-11-15 on Linux x64 against the live grid.

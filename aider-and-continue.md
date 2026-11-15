@@ -62,6 +62,9 @@ cn -p --auto "List the files here and say what each one is."
 `cn -p` runs one prompt and prints the answer; `--auto` lets it use its tools without asking. The CLI ran
 without a Continue account.
 
+Note on Continue: the CLI on npm was last published in June 2026, and the project's README says it is no
+longer actively maintained. The settings above are for that last version.
+
 ## Things to know
 
 - Prompts are processed in plain text on computers run by independent operators. Do not point a coding
