@@ -1,29 +1,31 @@
 # AI Power Grid with Hermes Agent and Goose
 
 Community notes, not an official AIPG document. Tested on 2026-11-15 on Linux x64 against the live grid
-(`https://api.aipowergrid.io/v1`) with Hermes Agent v0.23.1 and Goose v1.59.1.
+(`https://api.aipowergrid.io/v1`) with Hermes Agent v0.23.1 and Goose v1.59.1. `gpt-oss-120b` was tested
+again on 2026-11-16, after a fix on the grid.
 
 Both agents talk to the grid as an ordinary OpenAI-compatible endpoint. No plugin is needed: an address,
 a Grid API key and a model name are enough.
 
 ## Which model
 
-Use `qwen38-flash-next-nvfp4`.
+Both text models did the test task. `qwen38-flash-next-nvfp4` is the one most of these notes were written
+with. Which models are online changes during the day; `GET /v1/models` shows the current list.
 
 | Model | Hermes Agent | Goose |
 | --- | --- | --- |
 | `qwen38-flash-next-nvfp4` | works: wrote a script, ran it, wrote the result to a file (37 s, 6 model calls, about 80,000 tokens) | works: same task in 23 s |
-| `gpt-oss-120b` | fails: "didn't produce a reply this time, even after retries" (8 calls, nothing done) | fails: the run ends at once without calling a tool |
+| `gpt-oss-120b` | works since 2026-11-16: same task in 28 s (one run) | works since 2026-11-16: same task in 17 s (one run) |
 
 The test task both times: "There is a file items.csv here. Write a Python script total.py that reads it
 and prints the total value (qty times price summed). Run it, and write the printed number into
 report.txt. Tell me the number."
 
-`gpt-oss-120b` answers plain chat requests and simple one-step tool requests. On this multi-step task the
-grid returned its tool call inside the reasoning text instead of as a tool call, so the agents saw an
-empty reply. The same happened in OpenClaw. It is reported as
-[aipg-documentation#70](https://github.com/AIPowerGrid/aipg-documentation/issues/70); until that changes,
-it is not usable for agent work.
+Until 2026-11-16 `gpt-oss-120b` failed here: on this multi-step task the grid returned its tool call
+inside the reasoning text instead of as a tool call, so the agents saw an empty reply
+([aipg-documentation#70](https://github.com/AIPowerGrid/aipg-documentation/issues/70)). The AIPG team
+changed the worker that evening, and the runs in the table are from after that change. OpenClaw was not
+run again with this model.
 
 At the list price of that day (0.075 USD per million input tokens, 0.30 USD per million output tokens) the
 Hermes run cost about 0.6 US cents.
@@ -62,8 +64,8 @@ export GOOSE_PROVIDER=aipg GOOSE_MODEL=qwen38-flash-next-nvfp4
 goose run --with-builtin developer -t "List the files here and say what each one is."
 ```
 
-The file contains no key. It lists only `qwen38-flash-next-nvfp4`, with the grid's list price, because
-`gpt-oss-120b` does not work for tool use at the moment. Tested with Goose v1.59.1 on Linux: the test task
+The file contains no key. It lists only `qwen38-flash-next-nvfp4`, with the grid's list price; that is the
+model the file was tested with. Tested with Goose v1.59.1 on Linux: the test task
 above ran in 14 s through this provider. The Goose desktop app was not tested.
 
 ## Hermes Agent

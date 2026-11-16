@@ -1,7 +1,8 @@
 # AI Power Grid with Aider and Continue
 
 Community notes, not an official AIPG document. Tested on 2026-11-15 on Linux x64 against the live grid
-(`https://api.aipowergrid.io/v1`) with Aider 0.86.2 and the Continue CLI (`cn`) 1.5.47.
+(`https://api.aipowergrid.io/v1`) with Aider 0.86.2 and the Continue CLI (`cn`) 1.5.47. Continue with
+`gpt-oss-120b` was tested again on 2026-11-16, after a fix on the grid.
 
 Both talk to the grid as an ordinary OpenAI-compatible endpoint. No plugin is needed.
 
@@ -10,11 +11,13 @@ Both talk to the grid as an ordinary OpenAI-compatible endpoint. No plugin is ne
 | Model | Aider | Continue CLI |
 | --- | --- | --- |
 | `qwen38-flash-next-nvfp4` | works: wrote a correct script in 11 s (849 tokens sent, 618 received) | works: wrote the script, ran it, wrote the result file, 9 s |
-| `gpt-oss-120b` | works: wrote a correct script in 18 s (802 sent, 424 received) | fails: the run ends after 5 s with no output and no files |
+| `gpt-oss-120b` | works: wrote a correct script in 18 s (802 sent, 424 received) | works since 2026-11-16: wrote the script, ran it, wrote the result file, 21 s (one run) |
 
-Aider does not use tool calls; it asks the model for file edits as text. That is why `gpt-oss-120b` works
-there. Continue uses tool calls, and on `gpt-oss-120b` the grid currently returns them inside the
-reasoning text ([aipg-documentation#70](https://github.com/AIPowerGrid/aipg-documentation/issues/70)).
+Aider does not use tool calls; it asks the model for file edits as text. Continue uses tool calls. Until
+2026-11-16 the grid returned `gpt-oss-120b`'s tool calls inside the reasoning text on this task
+([aipg-documentation#70](https://github.com/AIPowerGrid/aipg-documentation/issues/70)), and Continue ended
+after 5 s with no output. The AIPG team changed the worker that evening; the run in the table is from
+after that change.
 
 Test task for Aider: "Write a Python script total.py that reads items.csv from the current directory and
 prints the total value (qty times price summed) as a plain number." The script was then run by hand and
