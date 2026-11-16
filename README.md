@@ -13,10 +13,10 @@ what was not tested.
 | Hermes Agent | v0.23.1 | works | works since 2026-11-16 | [hermes-agent-and-goose.md](hermes-agent-and-goose.md) |
 | Aider | 0.86.2 | works | works | [aider-and-continue.md](aider-and-continue.md) |
 | Continue CLI (no longer maintained) | 1.5.47 | works | works since 2026-11-16 | [aider-and-continue.md](aider-and-continue.md) |
-| OpenClaw | 2026.11.3 | works | failed on 2026-11-15, not run again | [openclaw-aipg-provider](https://github.com/speteai/openclaw-aipg-provider) (plugin) |
+| OpenClaw | 2026.11.3 | works | works since 2026-11-16 | [openclaw-aipg-provider](https://github.com/speteai/openclaw-aipg-provider) (plugin) |
 
 Tested on 2026-11-15 on Linux x64 against the live grid; `gpt-oss-120b` again on 2026-11-16 in Goose,
-Hermes Agent and the Continue CLI.
+Hermes Agent, the Continue CLI and OpenClaw.
 
 ## Quick settings
 
@@ -37,7 +37,7 @@ Until then, on multi-step tasks the grid returned this model's tool call inside 
 of as a tool call, so agent programs saw an empty reply
 ([aipg-documentation#70](https://github.com/AIPowerGrid/aipg-documentation/issues/70)). The AIPG team changed
 the worker on the evening of 2026-11-16. After that the test task ran through in Goose, Hermes Agent and
-the Continue CLI, one run each.
+the Continue CLI (one run each) and in OpenClaw (3 of 3 runs).
 
 ## Privacy
 
