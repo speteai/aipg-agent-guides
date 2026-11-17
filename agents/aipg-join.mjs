@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // Gives an agent with an EVM wallet its own AI Power Grid account and API key.
 // Community-written, not an official AIPG file. Talks only to api.aipowergrid.io.
+// The calls follow the official page https://aipowergrid.io/docs/agent-wallet-accounts.
 //
 //   npm install viem
 //   AIPG_WALLET_KEY_FILE=/path/to/wallet.key node aipg-join.mjs
@@ -52,13 +53,13 @@ if (!apiKey) {
 
   const ch = await call("/accounts/wallet/challenge", {
     method: "POST",
-    body: JSON.stringify({ address: acct.address, domain: "console.aipowergrid.io", uri: "https://console.aipowergrid.io", chain_id: 8453 }),
+    body: JSON.stringify({ address: acct.address, domain: "localhost", uri: "http://localhost", chain_id: 8453 }),
   });
   if (ch.status !== 200 || !ch.body?.message) fail("challenge", `HTTP ${ch.status} ${short(ch.body)}`);
 
   // A sign-in message: signing it moves nothing and approves no transfer. It is checked and shown.
   const msg = ch.body.message;
-  if (!msg.startsWith("console.aipowergrid.io wants you to sign in") || !msg.includes(acct.address) || !/Chain ID: 8453\b/.test(msg))
+  if (!msg.startsWith("localhost wants you to sign in") || !msg.includes(acct.address) || !/Chain ID: 8453\b/.test(msg))
     fail("challenge", "the sign-in message is not the expected one, nothing was signed: " + msg.slice(0, 300));
   out.signed_message = msg;
   const signature = await acct.signMessage({ message: ch.body.message });

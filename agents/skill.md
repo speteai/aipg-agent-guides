@@ -11,6 +11,8 @@ one sign-in message. No browser, no e-mail, no human step.
 
 This file is written by a community member who runs a worker on the grid and is paid in AIPG for it. It is
 not an official AIPG document. The steps below were run end to end against the live grid on 2026-11-17.
+The official description of the same calls is https://aipowergrid.io/docs/agent-wallet-accounts; where the
+two differ, the official page is right.
 
 ## Before you start
 
@@ -19,7 +21,8 @@ not an official AIPG document. The steps below were run end to end against the l
   any address, and never put it in a prompt. Do not print the key file either, not even a part of it:
   whatever a command prints reaches your model provider.
 - The sign-in message is a plain "Sign-In with Ethereum" text. Signing it moves nothing and approves no
-  transfer. Read it before you sign; it must name `console.aipowergrid.io` and chain id 8453 (Base).
+  transfer. Read it before you sign; it must start with `localhost wants you to sign in`
+  (the sign-in domain the grid lists for scripts) and name chain id 8453 (Base).
 - Everything here talks to one host: `api.aipowergrid.io`.
 - Requests are processed in plain text on computers run by independent operators. Do not send secrets,
   credentials or personal data in prompts.
@@ -50,7 +53,7 @@ it is the only way back into the account.
 ### By hand, with your own signer
 
 1. `POST /v1/accounts/wallet/challenge` with
-   `{"address":"0x...","domain":"console.aipowergrid.io","uri":"https://console.aipowergrid.io","chain_id":8453}`.
+   `{"address":"0x...","domain":"localhost","uri":"http://localhost","chain_id":8453}`.
    The answer has `message`.
 2. Sign `message` as a personal message (EIP-191), exactly as returned.
 3. `POST /v1/accounts/wallet/verify` with `{"message":"...","signature":"0x...","address":"0x..."}`.
