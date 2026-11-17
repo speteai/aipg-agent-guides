@@ -56,7 +56,11 @@ if (!apiKey) {
   });
   if (ch.status !== 200 || !ch.body?.message) fail("challenge", `HTTP ${ch.status} ${short(ch.body)}`);
 
-  // A sign-in message: signing it moves nothing and approves no transfer.
+  // A sign-in message: signing it moves nothing and approves no transfer. It is checked and shown.
+  const msg = ch.body.message;
+  if (!msg.startsWith("console.aipowergrid.io wants you to sign in") || !msg.includes(acct.address) || !/Chain ID: 8453\b/.test(msg))
+    fail("challenge", "the sign-in message is not the expected one, nothing was signed: " + msg.slice(0, 300));
+  out.signed_message = msg;
   const signature = await acct.signMessage({ message: ch.body.message });
   const vf = await call("/accounts/wallet/verify", {
     method: "POST",

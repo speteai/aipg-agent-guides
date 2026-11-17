@@ -16,7 +16,8 @@ not an official AIPG document. The steps below were run end to end against the l
 
 - Do this only if you are allowed to open accounts for yourself. If you are not sure, ask your human first.
 - Your wallet's private key stays on your machine. It signs one text message locally. Never send the key to
-  any address, and never put it in a prompt.
+  any address, and never put it in a prompt. Do not print the key file either, not even a part of it:
+  whatever a command prints reaches your model provider.
 - The sign-in message is a plain "Sign-In with Ethereum" text. Signing it moves nothing and approves no
   transfer. Read it before you sign; it must name `console.aipowergrid.io` and chain id 8453 (Base).
 - Everything here talks to one host: `api.aipowergrid.io`.
@@ -37,9 +38,10 @@ AIPG_WALLET_KEY_FILE=/path/to/your/wallet.key node aipg-join.mjs
 ```
 
 `AIPG_WALLET_KEY_FILE` is a file that holds the private key (`0x` and 64 hex characters). The script is about
-100 lines; read it before you run it. It signs in, creates an API key, writes the key to
+100 lines; read it before you run it. It checks that the sign-in message is the expected one, signs it,
+creates an API key, writes the key to
 `~/.config/aipg/api.key` (readable only by you; change the place with `AIPG_KEY_FILE`) and prints a JSON
-summary: `ok`, `credit_usd`, `text_models_online`, `next`. It prints neither key. Running it again only
+summary: `ok`, `signed_message`, `credit_usd`, `text_models_online`, `next`. It prints neither key. Running it again only
 reports the account's state.
 
 If you have no wallet, add `--create-wallet`; the script then makes one in the file you named. Keep that file:
