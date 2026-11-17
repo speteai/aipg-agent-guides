@@ -77,9 +77,11 @@ curl -s https://api.aipowergrid.io/v1/chat/completions \
 
 - **Which models are online** changes during the day, because they depend on the operators' workers.
   `GET /v1/models` lists them; `"model":"auto"` picks one that is online.
-- **Text models on 2026-11-17:** `qwen38-flash-next-nvfp4`, `gpt-oss-120b`, `grid/qwen3:8b`. The first two
-  handle multi-step tool calling; they were tested with OpenClaw, Hermes Agent, Goose, Aider and the
-  Continue CLI.
+- **Text models on 2026-11-17:** `qwen38-flash-next-nvfp4`, `gpt-oss-120b`, `grid/qwen3:8b`. For multi-step
+  work with tools use `qwen38-flash-next-nvfp4`; it was tested with OpenClaw, Hermes Agent, Goose, Aider,
+  the Continue CLI, PicoClaw, ZeroClaw and nanobot. `gpt-oss-120b` returns tool calls too, but in tests on
+  2026-11-17 it sometimes said a step was done without calling the tool (6 of 20 requests at the last step
+  of a four-step task).
 - **List price:** 0.075 USD per million input tokens, 0.30 USD per million output tokens. Images from about
   0.003 USD each (`POST /v1/images/generations`, model `z-image-turbo`). Current prices: `GET /v1/pricing`.
 - **Credit left:** `GET /v1/account/credits`, field `total_spendable_usd`.
