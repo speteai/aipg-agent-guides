@@ -14,7 +14,9 @@ what was not tested.
 | Aider | 0.86.2 | works | works | [aider-and-continue.md](aider-and-continue.md) |
 | Continue CLI (no longer maintained) | 1.5.47 | works | works since 2026-11-16 | [aider-and-continue.md](aider-and-continue.md) |
 | OpenClaw | 2026.11.3 | works | works since 2026-11-16 | [openclaw-aipg-provider](https://github.com/speteai/openclaw-aipg-provider) (plugin) |
+| elizaOS (runtime and OpenAI plugin) | 2.0.5 | works | works | [elizaos.md](elizaos.md) |
 
+elizaOS was tested on 2026-11-17 at the level of single model calls, not as a whole agent; see its guide.
 Tested on 2026-11-15 on Linux x64 against the live grid; `gpt-oss-120b` again on 2026-11-16 in Goose,
 Hermes Agent, the Continue CLI and OpenClaw.
 
