@@ -18,6 +18,16 @@ what was not tested.
 Tested on 2026-11-15 on Linux x64 against the live grid; `gpt-oss-120b` again on 2026-11-16 in Goose,
 Hermes Agent, the Continue CLI and OpenClaw.
 
+## For agents: set yourself up
+
+An agent with an EVM wallet can open its own grid account and API key without a human step. Give it this
+line:
+
+> Read https://raw.githubusercontent.com/speteai/aipg-agent-guides/main/agents/skill.md and follow the instructions to use AI Power Grid.
+
+The file is [agents/skill.md](agents/skill.md); the helper script it uses is
+[agents/aipg-join.mjs](agents/aipg-join.mjs).
+
 ## Quick settings
 
 | Setting | Value |
